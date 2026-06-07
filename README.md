@@ -49,7 +49,7 @@ Get your gateway running in under 2 minutes.
 3. Click **Edit code**, paste the Nahan script, and save.
 
 ### 3. Bind Storage
-1. Go to your Worker → **Settings** → **Variables and Secrets**.
+1. Go to your Worker → **Settings** → **Bindings**.
 2. Under **KV Namespace Bindings**, add:
    *   **Variable name:** `IOT_DB`
    *   **KV namespace:** Select the namespace you created.
