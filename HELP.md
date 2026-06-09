@@ -1,66 +1,53 @@
-# Nahan Project - User Guide
+# pArSa ULtrA pAnEL - User Guide
 
-This guide walks you through the steps to access, configure, and manage your "Nahan" network gateway.
+This guide provides comprehensive instructions on how to access, configure, and manage your pArSa ULtrA pAnEL gateway.
 
-## 1. Accessing the Management Dashboard
+## 1. Smart Usage Management (Request-Based)
+This panel replaces traditional volume-based (GB) accounting with an advanced **Request-Based** system.
+* **Mechanism:** Using precise mathematical formulas, the system converts your allocated volume (MB) into a specific request quota. This ensures highly accurate and efficient resource management on the Cloudflare Edge infrastructure.
 
-Your management dashboard is located at `/sync/dash` by default.
-To open it, open your browser and navigate to the following address:
-`https://<YOUR_WORKER_DOMAIN>/sync/dash`
+## 2. Multi-Node Integration (Slave Architecture)
+To manage multiple workers centrally, follow these steps:
+1. **Generate Secret Key:** In your Master panel, navigate to **Advanced** and generate a unique "Secret Key."
+2. **Configure Slave Node:** In your second (Slave) panel, go to the same section and input the Master's Secret Key.
+3. **Request Connection:** In the Slave panel, assign a name to the node, enter the Master's full URL (e.g., `https://your-worker.dev/xiron`), and click **Send Request**.
+4. **Approve:** Return to your Master panel, go to the **Nodes** section, and approve the connection request. Ensure the **Slave Node** toggle is enabled to complete the sync.
 
-*(Note: If you open the main domain address or the `/sync` path without the WebSocket identifier in the browser, the system will automatically camouflage and load disguise sites like Ubuntu or Docker to mislead network scanners).*
 
-## 2. Authentication
 
-Upon accessing the dashboard, you will be greeted with a login page.
-*   **Default Master Key:** `admin`
-*   Enter the word `admin` and click the **Authenticate** button.
+## 3. All-Mode (Smart Failover & Load Balancing)
+All-Mode provides high availability by merging all your nodes into one connection.
+* **Mechanism:** It aggregates your Master and Slave nodes into a single file. Your client periodically checks the connection stability every minute.
+* **Smart Switching:** If the current node is stable, the connection remains active. In case of latency or connection loss, the client automatically switches to the node with the lowest ping, ensuring an uninterrupted and optimized connection.
+* **How to Use:** Download the All-Mode configuration from the **Endpoints** section or your subscription link and import it into your client (e.g., V2rayNG, Shadowrocket).
 
-*(If you see a red warning message "⚠️ IOT_DB space not found!", it means you have not connected the D1 database to your worker in the Cloudflare panel. Make sure to establish this connection in Cloudflare before saving any changes).*
+## 4. Telegram Bot & Admin Management
+The panel features a sleek Telegram bot with a glass-morphism UI.
+* **Setup:** Register your Bot Token and Master Admin Numeric ID in the **Advanced** section.
+* **Admin Access:** In the **Admins** section, add numeric Telegram IDs to grant management access to your team.
 
-## 3. Dashboard Sections
+### Bot Commands:
+* `/status`: Display server health, connected nodes, and real-time usage.
+* `/users`: List active users with direct management buttons.
+* `/pause [UserID]`: Suspend a specific user's access.
+* `/reset [UserID]`: Reset a user's consumed quota.
 
-The dashboard consists of the following main sections:
+## 5. Subscription Web
+Easily access your configurations without complex client setup. Open your Subscription Web URL in any browser to view, copy, or import your entire configuration list instantly.
 
-### 📡 Endpoints (Connections)
-In this section, you can retrieve your connection links to import into client applications.
-*   **Profile Cards:** Your profiles (default and added users) are displayed as separate cards.
-*   **Show QR Code:** Clicking the **Show QR Code** button on any card opens a window with a QR code that you can scan with your phone.
-*   **Cloud Sync URL (Sub Link):** A unified subscription link to fetch all configurations simultaneously. A copy button is available for quick copying.
+## 6. Advanced User Management
+In the **Users** section, you have full control:
+* **Edit:** Modify usernames, allocated quota, and expiration dates.
+* **Reset:** Instantly set a user's consumed usage back to zero.
 
-### 👥 Users Management
-A user management system with precise tracking of bandwidth and expiration dates:
-*   **Add User:** Set traffic limits (in GB) and validity days for each new user.
-*   **Pause User:** You can temporarily suspend a specific user's access by clicking the ⏸️ button.
-*   **Subscription Links and QR:** Ability to get a dedicated subscription link for each user.
+## 7. Security & Access Paths
+* **Access URL:** Always use the `/xiron/space` path to access your panel (e.g., `https://your-worker.dev/xiron/space`).
+* **API Path:** If you change the API path in settings, append the new path to your Worker URL: `YOUR_API/space`.
+* **Integrity Warning:** The source code is obfuscated to protect intellectual property. Please **do not** modify or re-obfuscate the code, as it may break the D1 (`XIRON`) bindings and routing.
 
-### 📊 Metrics (Network Status)
-Displays information about the Cloudflare Edge node your traffic is passing through.
-*   **Server Details:** Shows the origin IP, the processing Edge node (Colo), and geographic location.
-*   **Network Latency Diagnostics:** By clicking "Run Diagnostics", you can measure your browser's real-time latency (ping) to the entered clean IPs.
+---
 
-### ⚙️ System (Basic Settings)
-Configure the server's identity and core behaviors:
-*   **Display Protocol:** Switch between Alpha (VLESS), Beta (Trojan), or **Both** (both concurrently in the sub link) modes.
-*   **Unique Identifier (UUID):** Your connection password or identifier. If left blank, the system generates an automatic ID.
-*   **Secret API Route:** Change the dashboard login path and subscription address. This changes your login address to `/<secret-path>/dash`.
-*   **Master Key:** Change the dashboard login password from `admin` to a secure phrase.
-*   **Backup & Restore:** Save current settings to a local `.json` file or load a previous backup file.
-
-### 🌐 Advanced
-Optimize network connection details and integrations:
-*   **Clean IPs:** Enter a list of Cloudflare clean IPs (one IP per line). The subscription link automatically combines and multiplies configurations with these values.
-*   **Slave Nodes:** If you have created other workers on different domains besides this panel, enter their links here separated by commas (`,`) (e.g., `node1.domain.com, node2.domain.com`). 
-The main panel automatically synchronizes all changes and users with them and includes their configurations in the subscription link!
-*   **Telegram Bot:** Enter your bot token and ID to receive dashboard login alerts and manage remotely with `/status`, `/users`, and `/pause` commands.
-*   **Emergency Kill Switch:** A button to immediately cut off all proxy traffic.
-
-### 📋 Logs (Activity Report)
-*   View the history of recent login attempts and configuration changes.
-
-## 4. Saving Configurations
-
-After making changes in the **System** or **Advanced** sections:
-1. Click the blue **Update Config** button at the bottom of the page.
-2. The status will change to "Saving...", and the page will automatically refresh.
-3. *Important:* If you modified the **Secret API Route**, the page will automatically redirect to the new address. Make sure to bookmark the new address in your browser.
+### 🛠️ Troubleshooting
+* **D1 Database Error:** Ensure the `XIRON` binding is correctly defined in your Cloudflare Workers settings.
+* **Missing Configs:** Verify that the Slave Node has been successfully approved in the Master panel.
+* **Bot Not Responding:** Double-check the Admin Numeric ID and Bot Token in the **Advanced** settings.
