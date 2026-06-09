@@ -1,9 +1,9 @@
 <div align="center">
 
-# Nahan Project
+# pArSa ULtrA pAnEL
 ### Your Secure and Unlimited Gateway at the Network Edge
 
-**Nahan** is a secure, lightweight, and customizable reverse proxy that runs entirely on Cloudflare Edge. This project turns your virtual server into a powerful gateway supporting both VLESS and Trojan protocols, all managed through a beautiful, self-contained dashboard.
+**pArSa ULtrA pAnEL** is a secure, lightweight, and customizable reverse proxy that runs entirely on Cloudflare Edge. This project turns your virtual server into a powerful gateway supporting both VLESS and Trojan protocols, all managed through a beautiful, self-contained dashboard.
 
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
@@ -13,7 +13,7 @@
 
 ---
 
-## 🌟 Why Nahan?
+## 🌟 Why pArSa ULtrA pAnEL?
 
 Nahan is not just a proxy script; it's a complete connection management solution designed with a focus on **speed**, **security**, and **simplicity**.
 
