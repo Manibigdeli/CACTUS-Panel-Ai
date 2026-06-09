@@ -1,13 +1,12 @@
 <div align="center">
 
 # pArSa ULtrA pAnEL
-### Your Secure and Unlimited Gateway at the Network Edge
+### The Evolution of Intelligent Network Edge Management
 
-**pArSa ULtrA pAnEL** is a secure, lightweight, and customizable reverse proxy that runs entirely on Cloudflare Edge. This project turns your virtual server into a powerful gateway supporting both VLESS and Trojan protocols, all managed through a beautiful, self-contained dashboard.
+**pArSa ULtrA pAnEL** is a high-performance, request-based management solution running entirely on Cloudflare Workers. This fork redefines how you manage proxy connections by converting traditional data limits into request-based quotas and unifying multiple nodes into a single, powerful gateway.
 
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://workers.cloudflare.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.2-0A66C2?style=for-the-badge)]()
 
 </div>
 
@@ -15,57 +14,58 @@
 
 ## 🌟 Why pArSa ULtrA pAnEL?
 
-Nahan is not just a proxy script; it's a complete connection management solution designed with a focus on **speed**, **security**, and **simplicity**.
+We have re-engineered the original Nahan project for maximum control, speed, and aesthetics. With **Cloudflare D1** at its core, this panel provides a robust experience for managing complex, multi-node proxy setups.
 
-*   🛡️ **Hidden in the Network:** Unauthorized access is automatically redirected to public sites (like Ubuntu or Docker) to keep your server completely invisible to scanners.
-*   ⚡ **Zero Server Cost:** Runs entirely on Cloudflare's free plan. No VPS required, no server maintenance worries.
-*   🎨 **Modern Dashboard:** Responsive user interface supporting dark/light modes and bilingual (English/Persian).
-*   🤖 **Telegram Bot:** Manage your gateway, check usage, and receive login alerts directly via Telegram.
-*   📡 **Multi-user & Multi-IP:** Generate dedicated subscription links for different users and automatically combine them with clean IP lists.
+* 🎯 **Request-Based Billing:** No more guessing data volume. Define your user's capacity in requests, and the panel handles the rest.
+* 🔗 **All-Mode Unified Gateway:** Connect multiple Workers as "Slave Nodes" to a master panel and get a single, consolidated subscription link.
+* 🤖 **Pro Telegram Bot:** Manage everything with a beautiful, glass-morphism designed Telegram interface.
+* 🎨 **Immersive UI:** Enjoy a modern web dashboard with smooth animated backgrounds and responsive design.
 
 ## ✨ Key Features
 
 | Feature | Description |
 | :--- | :--- |
-| **🔐 Dual Support** | Instant switching between **VLESS** (Alpha mode), **Trojan** (Beta mode), or **Both** simultaneously. |
-| **📱 QR Code Generation** | Display QR codes for each profile for quick and easy setup on mobile devices. |
-| **👥 User Management** | Manage user bandwidth based on TB/GB with pause/resume functionality. Accurate upload and download tracking using D1 Database. |
-| **🌍 Clean IP Combiner** | Input a list of clean IPs; Nahan automatically generates all configs for these IPs. |
-| **🔗 Multi-Node** | Connect multiple workers (Slave Nodes) to a centralized management and get all configs in one sub. |
-| **💾 D1 Database** | Settings are persistently stored in Cloudflare D1 Database, solving KV's write limitations. |
-| **🚨 Emergency Kill Switch** | Immediately cut off all proxy traffic with a single click from the dashboard or Telegram. |
+| **📊 Smart Accounting** | Automatic conversion of usage into request counts. |
+| **🔗 Multi-Node Sync** | Link multiple workers via the dedicated "Nodes" section. |
+| **🌐 Subscription Web** | Dedicated sub-link page for easy configuration access in your browser. |
+| **🛠️ Full User Control** | Edit names, expiry, and reset usage instantly via Web or Bot. |
+| **🔐 Admin Access** | Add/Remove admins via Telegram numeric IDs for secure management. |
+| **💾 D1 Power** | Persistent, high-speed storage using Cloudflare D1 Database. |
+
+---
 
 ## 🚀 Quick Setup Guide
 
-Set up your gateway in less than 2 minutes.
+### 1. Database Initialization
+1. Navigate to **Cloudflare Dashboard** → **Storage & Databases** → **D1 SQLite**.
+2. Create a database (e.g., `xiron_db`).
 
-### 1. Create a D1 Database
-1. Go to the **Cloudflare** dashboard → **Storage and databases** → **D1 SQLite Database**.
-2. Create a new database (suggested name: `iot_db`).
+### 2. Deployment & Binding
+1. Create a new **Cloudflare Worker** and paste your code.
+2. Go to **Settings** → **Bindings** → **Add Binding**.
+3. **Crucial:**
+   * **Type:** D1 Database
+   * **Variable Name:** `XIRON` (Must be exactly this).
+   * **Database:** Select your created database.
+4. Deploy the worker.
 
-### 2. Deploy the Worker
-1. Go to **Workers & Pages** and click **Create Application**, then **Create Worker**.
-2. Choose a name (e.g., `nahan-core`), paste the content of `_worker.js` script into it, and click Deploy.
+### 3. Access Your Panel
+1. Access your dashboard via: `https://<your-worker-url>.workers.dev/xiron/space`
+2. **Login:** Use the default password `admin`.
+3. **Setup:** Navigate to the **System** tab to set your Master Key, then use the **Nodes** section to configure your multi-node architecture.
 
-### 3. Bind D1 Database to the Worker
-1. In your newly created worker's panel, go to **Bindings**.
-2. Click on **Add Binding** and select **D1 database**.
-3. In the **Variable name** field, enter exactly `IOT_DB` (regardless of your actual database name).
-4. In the **D1 Database** field, select the database you created in step 1.
-5. Save the changes.
+---
 
-### 4. Login and Configuration
-1. Open `https://<your-worker-url.workers.dev>/sync/dash`.
-2. Log in with the default key: `admin`. If you updated your panel from 2.1.0 version, the password is admin again.
-3. Apply your settings (UUID, clean IPs, protocols, etc.).
+## ⚠️ Source Integrity Note
+The source code provided in this repository is obfuscated to protect the project's intellectual property. Please **do not** modify or re-obfuscate the code, as it may break the core functionality, D1 database binding (`XIRON`), and the required routing (`/xiron/space`). Use the file as-is for the best experience.
 
-> **⚠️ Security Warning:** Immediately after logging in, change your Master Key in the **System** tab!
+---
 
-## 📖 Documentation
-For a comprehensive guide on dashboard features and how to connect other workers (Slave Nodes), please read the [User Guide](HELP.md).
+## 📖 Need Help?
+For detailed instructions on configuring multi-node connections, setting up the Telegram bot, or managing your admins, please refer to the [User Guide](HELP.md).
 
 ---
 
 <div align="center">
-Made with ❤️ by the Open Source Community
+Made with ❤️ for the Proxy Community
 </div>
