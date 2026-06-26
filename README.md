@@ -68,4 +68,6 @@ For detailed instructions on configuring multi-node connections, setting up the 
 
 <div align="center">
 Made with ❤️ for the Proxy Community
+CACTUS PANEL AI
+CACTUS AI🌵
 </div>
